@@ -56,11 +56,27 @@ public class BookManager {
         }
     }
 
-    public static void giveBookToUser(String username, String book) {
-        if (library.containsKey(book) && users.containsKey(username)) {
-            users.get(username).add(book);
+    public static void borrowBook(String username, String book) {
+        if (!users.containsKey(username)) {
+            Terminal.writeln("Такого пользователя не существует.");
+        } else if (!isBookAvailable(book)){
+            Terminal.writeln("Этой книги нет.");
+        } else if (users.get(username).contains(book)){
+            Terminal.writeln("У этого пользователя уже есть эта книга!");
         } else {
-            Terminal.writeln("Нет такого пользователя или книги. Проверьте ввод.");
+            library.put(book, library.get(book) - 1);
+            users.get(username).add(book);
+        }
+    }
+
+    public static void returnBook(String username, String book) {
+        if (users.containsKey(username)) {
+            Terminal.writeln("Такого пользователя не существует.");
+        } else if (!users.get(username).contains(book)) {
+            Terminal.writeln("У пользователь нет этой книги!");
+        } else {
+            library.put(book, library.get(book) + 1);
+            users.get(username).remove(book);
         }
     }
 

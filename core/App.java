@@ -16,8 +16,9 @@ public class App {
             Terminal.writeln("4. Вывести все книги");
             Terminal.writeln("5. Добавление пользователя");
             Terminal.writeln("6. Выдача книги");
-            Terminal.writeln("7. Просмотр книг пользователя");
-            Terminal.writeln("8. Удаление пользователя");
+            Terminal.writeln("7. Возврат книги");
+            Terminal.writeln("8. Просмотр книг пользователя");
+            Terminal.writeln("9. Удаление пользователя");
             Terminal.write("\nВыберите действие: ");
             int action = -1;
             if (scanner.hasNextInt()) {
@@ -57,15 +58,21 @@ public class App {
                 case 6: {
                     String username = userInput(scanner, "Введите имя пользователя");
                     String title = userInput(scanner, "Введите название книги, которую хотите выдать");
-                    BookManager.giveBookToUser(username, title);
+                    BookManager.borrowBook(username, title);
                     break;
                 }
                 case 7: {
                     String username = userInput(scanner, "Введите имя пользователя");
-                    BookManager.displayUserBooks(username);
+                    String title = userInput(scanner, "Введите название книги, которую хотите выдать");
+                    BookManager.returnBook(username, title);
                     break;
                 }
                 case 8: {
+                    String username = userInput(scanner, "Введите имя пользователя");
+                    BookManager.displayUserBooks(username);
+                    break;
+                }
+                case 9: {
                     String username = userInput(scanner, "Введите имя пользователя");
                     BookManager.removeUser(username);
                     break;
