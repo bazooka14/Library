@@ -1,9 +1,7 @@
 package core;
 
-import java.net.Inet4Address;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class BookManager {
@@ -70,10 +68,10 @@ public class BookManager {
     }
 
     public static void returnBook(String username, String book) {
-        if (users.containsKey(username)) {
+        if (!users.containsKey(username)) {
             Terminal.writeln("Такого пользователя не существует.");
         } else if (!users.get(username).contains(book)) {
-            Terminal.writeln("У пользователь нет этой книги!");
+            Terminal.writeln("У пользователя нет этой книги!");
         } else {
             library.put(book, library.get(book) + 1);
             users.get(username).remove(book);
