@@ -19,6 +19,8 @@ public class App {
             Terminal.writeln("7. Возврат книги");
             Terminal.writeln("8. Просмотр книг пользователя");
             Terminal.writeln("9. Удаление пользователя");
+            Terminal.writeln("10. Загрузить информацию в файл");
+            Terminal.writeln("11. Считать информацию из файла");
             Terminal.write("\nВыберите действие: ");
             int action = -1;
             if (scanner.hasNextInt()) {
@@ -75,6 +77,16 @@ public class App {
                 case 9: {
                     String username = userInput(scanner, "Введите имя пользователя");
                     BookManager.removeUser(username);
+                    break;
+                }
+                case 10: {
+                    String filename = userInput(scanner, "Введите название файла");
+                    BookManager.saveToFile(filename);
+                    break;
+                }
+                case 11: {
+                    String filename = userInput(scanner, "Введите название файла");
+                    BookManager.loadFromFile(filename);
                     break;
                 }
                 default:
